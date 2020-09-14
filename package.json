@@ -1,5 +1,5 @@
 {
-  "name": "my-react-application",
+  "name": "gss-webchat",
   "version": "0.1.0",
   "private": true,
   "main": "dist/js/index.js",
