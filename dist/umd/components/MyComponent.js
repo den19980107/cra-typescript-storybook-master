@@ -74,7 +74,7 @@
 
   class MyComponent extends React.Component {
     render() {
-      return React.createElement(React.Fragment, null, React.createElement("p", null, "Hello Lib!"));
+      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", null, "Hello Lib!"));
     }
 
   }
