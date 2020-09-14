@@ -35,8 +35,7 @@
   function BasicWebChatComponent({
     rawConfig
   }) {
-    const any = {};
-    const [directLine, setDirectline] = (0, _react.useState)(any);
+    const [directLine, setDirectline] = (0, _react.useState)(null);
     (0, _react.useEffect)(() => {
       if (!directLine) {
         initialDirectLine();

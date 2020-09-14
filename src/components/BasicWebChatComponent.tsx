@@ -8,8 +8,7 @@ interface Props {
 }
 
 export default function BasicWebChatComponent({ rawConfig }: Props): ReactElement {
-    const any: any = {}
-    const [directLine, setDirectline] = useState(any)
+    const [directLine, setDirectline] = useState(null)
 
     useEffect(() => {
         if (!directLine) {

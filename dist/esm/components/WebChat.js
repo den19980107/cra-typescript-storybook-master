@@ -6,15 +6,88 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-import React from 'react';
-import ReactWebChat from 'botframework-webchat';
+import React, { useEffect } from 'react';
+import memoize from 'memoize-one';
+import UnreadTag from './UnreadTag';
+import ReactWebChat_Package, { createStyleSet as BotFrameworkWebChat_createStyleSet } from 'botframework-webchat';
+import '../styles/WebChat.css';
 export default function WebChat({
+  className,
   config,
-  directLine,
-  className
+  directLine
 }) {
-  let webChatProps = _objectSpread({}, config);
+  let createStyleSet;
+  let activityMiddleware;
+  let unreadTagRef;
+  createStyleSet = memoize(styleOptions => {
+    console.log('createStyleSet');
+    return BotFrameworkWebChat_createStyleSet(styleOptions);
+  });
+  useEffect(() => {
+    unreadTagRef = /*#__PURE__*/React.createRef();
+    let lastHistoryId = null;
 
+    activityMiddleware = () => next => card => {
+      const {
+        activity: {
+          name,
+          type,
+          id,
+          value
+        }
+      } = card;
+
+      if (type === 'event' && name === 'UnReadInfo') {
+        lastHistoryId = value.lastHistoryId;
+        return () => /*#__PURE__*/React.createElement(UnreadTag, {
+          key: id,
+          ref: unreadTagRef,
+          firstUnreadId: value.firstUnreadId,
+          lastHistoryId: value.lastHistoryId
+        });
+      } else if (lastHistoryId && id === lastHistoryId) {
+        return children => /*#__PURE__*/React.createElement("div", {
+          key: id,
+          "data-key": id
+        }, next(card)(children));
+      } else {
+        return next(card);
+      }
+    };
+  }, []);
+  /**
+   * 引入 ReactWebChat 有分兩種狀況：
+   * 
+   * 1. 使用 webpack build 出來的 gss-webchat.js：
+   *    如果是使用 gss-webchat.js 需要在 html 中引入 botframework webchat-es5.js 的 cdn
+   *    所以 ReactWebChat 會從 window 中拿取
+   * 
+   * 2. 使用 rollup.js build 出可以在其他 react 專案中以 component 引入的 gss-webchat-component.js：
+   *    使用 gss-webchat-component.js 則是需要 user 在自己的專案中安裝 botframework-webchat 的 npm 套件
+   *    所以 ReactWebChat 會從 package 中拿取
+   */
+  // 1. 使用 webpack build 出來的 gss-webchat.js
+
+  let {
+    ReactWebChat
+  } = window.WebChat;
+
+  if (!ReactWebChat) {
+    // 2. 使用 rollup.js build 出可以在其他 react 專案中以 component 引入的 gss-webchat-component.js
+    ReactWebChat = ReactWebChat_Package;
+  }
+
+  let webChatProps = _objectSpread(_objectSpread({}, config), {}, {
+    userID: config.userId,
+    username: config.userName,
+    className: `${className || ''} web-chat`,
+    directLine: directLine,
+    store: config.webChatOptions.store,
+    styleSet: createStyleSet(config.webChatOptions.styleOptions),
+    activityMiddleware: activityMiddleware
+  });
+
+  ['botId', 'botName', 'userId', 'userName', 'directLineOptions', 'webChatOptions'].forEach(k => delete webChatProps[k]);
   return directLine ? /*#__PURE__*/React.createElement(ReactWebChat, webChatProps) : /*#__PURE__*/React.createElement("div", {
     className: `${className || ''} connect-spinner`
   }, /*#__PURE__*/React.createElement("div", {

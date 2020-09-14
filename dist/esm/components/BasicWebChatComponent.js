@@ -6,8 +6,7 @@ import DirectLine from '../utils/DirectLine';
 export default function BasicWebChatComponent({
   rawConfig
 }) {
-  const any = {};
-  const [directLine, setDirectline] = useState(any);
+  const [directLine, setDirectline] = useState(null);
   useEffect(() => {
     if (!directLine) {
       initialDirectLine();

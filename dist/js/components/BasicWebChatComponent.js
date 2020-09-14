@@ -41,9 +41,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function BasicWebChatComponent(_ref) {
   var rawConfig = _ref.rawConfig;
-  var any = {};
 
-  var _useState = (0, _react.useState)(any),
+  var _useState = (0, _react.useState)(null),
       _useState2 = _slicedToArray(_useState, 2),
       directLine = _useState2[0],
       setDirectline = _useState2[1];
