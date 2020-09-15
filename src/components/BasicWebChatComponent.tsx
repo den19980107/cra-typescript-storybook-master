@@ -1,7 +1,7 @@
 import React, { ReactElement, useState, useEffect } from 'react'
 import WebChat from './WebChat'
 import Configuration from '../utils/Configuration'
-import DirectLine from '../utils/DirectLine'
+import { createDirectLine } from '../utils/DirectLine'
 
 interface Props {
     rawConfig: GSSWebChat.IWebChatConfig
@@ -18,7 +18,7 @@ export default function BasicWebChatComponent({ rawConfig }: Props): ReactElemen
 
     const generateDirectLine = async (rawConfig: GSSWebChat.IWebChatConfig): Promise<BotFrameworkWebChat.IDirectLine> => {
         const config = await Configuration.initial(rawConfig)
-        const directline = await DirectLine.createDirectLine(config.directLineOptions)
+        const directline = await createDirectLine(config.directLineOptions)
         return directline
     }
 

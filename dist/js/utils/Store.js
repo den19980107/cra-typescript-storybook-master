@@ -15,6 +15,8 @@ var _Configuration = _interopRequireDefault(require("./Configuration"));
 
 var _Container = _interopRequireDefault(require("./Container"));
 
+var _botframeworkWebchat = require("botframework-webchat");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
@@ -28,7 +30,7 @@ var createStore = function createStore() {
   var lastHistoryId = '';
   var historyAlredyLoad = false;
   var notifyConnectFulfilledObservers = false;
-  store = window.WebChat.createStore({}, function (_ref) {
+  store = (0, _botframeworkWebchat.createStore)({}, function (_ref) {
     var dispatch = _ref.dispatch;
     return function (next) {
       return function (action) {

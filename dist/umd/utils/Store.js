@@ -1,16 +1,16 @@
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
-    define(["exports", "./DirectLine", "./Storage", "./Configuration", "./Container"], factory);
+    define(["exports", "./DirectLine", "./Storage", "./Configuration", "./Container", "botframework-webchat"], factory);
   } else if (typeof exports !== "undefined") {
-    factory(exports, require("./DirectLine"), require("./Storage"), require("./Configuration"), require("./Container"));
+    factory(exports, require("./DirectLine"), require("./Storage"), require("./Configuration"), require("./Container"), require("botframework-webchat"));
   } else {
     var mod = {
       exports: {}
     };
-    factory(mod.exports, global.DirectLine, global.Storage, global.Configuration, global.Container);
+    factory(mod.exports, global.DirectLine, global.Storage, global.Configuration, global.Container, global.botframeworkWebchat);
     global.undefined = mod.exports;
   }
-})(this, function (exports, _DirectLine, _Storage, _Configuration, _Container) {
+})(this, function (exports, _DirectLine, _Storage, _Configuration, _Container, _botframeworkWebchat) {
   "use strict";
 
   Object.defineProperty(exports, "__esModule", {
@@ -39,7 +39,7 @@
     let lastHistoryId = '';
     let historyAlredyLoad = false;
     let notifyConnectFulfilledObservers = false;
-    store = window.WebChat.createStore({}, ({
+    store = (0, _botframeworkWebchat.createStore)({}, ({
       dispatch
     }) => next => action => {
       console.log(action.type);

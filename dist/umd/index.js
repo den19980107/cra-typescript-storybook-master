@@ -97,21 +97,23 @@
   //Utils.
 
 
+  const Components = {
+    BasicWebChatComponent: _BasicWebChatComponent2.default,
+    WebChat: _WebChat2.default,
+    MinimizableWebChat: _MinimizableWebChat2.default
+  };
+  const Utils = {
+    Storage: _Storage2.default,
+    Store: _Store2.default,
+    WebChatToggleStateObservable: _objectSpread(_objectSpread({}, _WebChatToggleStateObservable2.default), {}, {
+      notify: _WebChatToggleStateObservable.notify
+    }),
+    DirectLine: _DirectLine2.default,
+    Configuration: _Configuration2.default
+  };
   exports.default = {
-    Components: {
-      BasicWebChatComponent: _BasicWebChatComponent2.default,
-      WebChat: _WebChat2.default,
-      MinimizableWebChat: _MinimizableWebChat2.default
-    },
-    Utils: {
-      Storage: _Storage2.default,
-      Store: _Store2.default,
-      WebChatToggleStateObservable: _objectSpread(_objectSpread({}, _WebChatToggleStateObservable2.default), {}, {
-        notify: _WebChatToggleStateObservable.notify
-      }),
-      DirectLine: _DirectLine2.default,
-      Configuration: _Configuration2.default
-    }
+    Components,
+    Utils
   };
   window.GSSWebChat = {
     createBasicWebChat: _createBasicWebChat2.default,

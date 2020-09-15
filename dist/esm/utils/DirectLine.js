@@ -5,11 +5,12 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 import Configuration from "./Configuration";
+import { createDirectLine as BotFrameworkWebChat_createDirectLine } from 'botframework-webchat';
 let directLine = null;
 
 const createDirectLine = async directLineOptions => {
   if (directLineOptions.token) {
-    directLine = window.WebChat.createDirectLine(directLineOptions);
+    directLine = BotFrameworkWebChat_createDirectLine(directLineOptions);
   } else {
     //fetchToken
     const url = directLineOptions.domain + '/tokens/generate/' + directLineOptions.conversationId;
@@ -25,7 +26,7 @@ const createDirectLine = async directLineOptions => {
     const {
       token
     } = await res.json();
-    directLine = window.WebChat.createDirectLine(_objectSpread(_objectSpread({}, directLineOptions), {}, {
+    directLine = BotFrameworkWebChat_createDirectLine(_objectSpread(_objectSpread({}, directLineOptions), {}, {
       token
     }));
   }
@@ -48,13 +49,14 @@ const getWatermark = () => directLine && directLine.watermark || 0;
 
 
 const addCurrentUser = next => {
-  const currentUserId = Configuration.get().userId;
+  const config = Configuration.get();
   directLine && directLine.postActivity({
     from: {
-      id: currentUserId
+      id: config.userId,
+      name: config.userName
     },
     membersAdded: [{
-      id: currentUserId
+      id: config.userId
     }],
     type: 'conversationUpdate'
   }).subscribe({
@@ -65,13 +67,14 @@ const addCurrentUser = next => {
 };
 
 const removeCurrentUser = next => {
-  const currentUserId = Configuration.get().userId;
+  const config = Configuration.get();
   directLine && directLine.postActivity({
     from: {
-      id: currentUserId
+      id: config.userId,
+      name: config.userName
     },
     membersRemoved: [{
-      id: currentUserId
+      id: config.userId
     }],
     type: 'conversationUpdate'
   }).subscribe({
@@ -82,9 +85,11 @@ const removeCurrentUser = next => {
 };
 
 const addMembers = (members, next) => {
+  const config = Configuration.get();
   directLine && directLine.postActivity({
     from: {
-      id: Configuration.get().userId
+      id: config.userId,
+      name: config.userName
     },
     membersAdded: members,
     type: 'conversationUpdate'
@@ -96,9 +101,11 @@ const addMembers = (members, next) => {
 };
 
 const removeMembers = (members, next) => {
+  const config = Configuration.get();
   directLine && directLine.postActivity({
     from: {
-      id: Configuration.get().userId
+      id: config.userId,
+      name: config.userName
     },
     membersRemoved: members,
     type: 'conversationUpdate'
@@ -114,8 +121,7 @@ export default {
   addMembers,
   removeMembers,
   addCurrentUser,
-  removeCurrentUser,
-  createDirectLine
+  removeCurrentUser
 };
 export { createDirectLine, getDirectLine, endDirectLine };
 //# sourceMappingURL=DirectLine.js.map

@@ -2,7 +2,7 @@ import DirectLine, { getDirectLine } from './DirectLine';
 import Storage from './Storage';
 import Configuration from './Configuration';
 import Container from './Container';
-
+import { createStore as BotFrameworkWebChat_createStore } from 'botframework-webchat'
 let store: BotFrameworkWebChat.IStore = null;
 
 const createStore = (): BotFrameworkWebChat.IStore => {
@@ -12,7 +12,7 @@ const createStore = (): BotFrameworkWebChat.IStore => {
     let historyAlredyLoad = false;
     let notifyConnectFulfilledObservers = false;
 
-    store = window.WebChat.createStore({}, ({ dispatch }: { dispatch: any }) => (next: (arg0: any) => void) => (action: { type: string; payload: any; }) => {
+    store = BotFrameworkWebChat_createStore({}, ({ dispatch }: { dispatch: any }) => (next: (arg0: any) => void) => (action: { type: string; payload: any; }) => {
         console.log(action.type);
 
         if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {

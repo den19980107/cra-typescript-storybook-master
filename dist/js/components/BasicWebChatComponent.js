@@ -15,7 +15,7 @@ var _WebChat = _interopRequireDefault(require("./WebChat"));
 
 var _Configuration = _interopRequireDefault(require("../utils/Configuration"));
 
-var _DirectLine = _interopRequireDefault(require("../utils/DirectLine"));
+var _DirectLine = require("../utils/DirectLine");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
@@ -66,7 +66,7 @@ function BasicWebChatComponent(_ref) {
             case 2:
               config = _context.sent;
               _context.next = 5;
-              return _DirectLine.default.createDirectLine(config.directLineOptions);
+              return (0, _DirectLine.createDirectLine)(config.directLineOptions);
 
             case 5:
               directline = _context.sent;

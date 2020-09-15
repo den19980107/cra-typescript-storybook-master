@@ -2,6 +2,7 @@ import DirectLine, { getDirectLine } from './DirectLine';
 import Storage from './Storage';
 import Configuration from './Configuration';
 import Container from './Container';
+import { createStore as BotFrameworkWebChat_createStore } from 'botframework-webchat';
 let store = null;
 
 const createStore = () => {
@@ -9,7 +10,7 @@ const createStore = () => {
   let lastHistoryId = '';
   let historyAlredyLoad = false;
   let notifyConnectFulfilledObservers = false;
-  store = window.WebChat.createStore({}, ({
+  store = BotFrameworkWebChat_createStore({}, ({
     dispatch
   }) => next => action => {
     console.log(action.type);

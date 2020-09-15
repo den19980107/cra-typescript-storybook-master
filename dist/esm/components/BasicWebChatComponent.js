@@ -2,7 +2,7 @@ import _pt from "prop-types";
 import React, { useState, useEffect } from 'react';
 import WebChat from './WebChat';
 import Configuration from '../utils/Configuration';
-import DirectLine from '../utils/DirectLine';
+import { createDirectLine } from '../utils/DirectLine';
 export default function BasicWebChatComponent({
   rawConfig
 }) {
@@ -15,7 +15,7 @@ export default function BasicWebChatComponent({
 
   const generateDirectLine = async rawConfig => {
     const config = await Configuration.initial(rawConfig);
-    const directline = await DirectLine.createDirectLine(config.directLineOptions);
+    const directline = await createDirectLine(config.directLineOptions);
     return directline;
   };
 

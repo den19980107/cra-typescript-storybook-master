@@ -24,8 +24,6 @@
 
   var _Configuration2 = _interopRequireDefault(_Configuration);
 
-  var _DirectLine2 = _interopRequireDefault(_DirectLine);
-
   function _interopRequireDefault(obj) {
     return obj && obj.__esModule ? obj : {
       default: obj
@@ -44,7 +42,7 @@
 
     const generateDirectLine = async rawConfig => {
       const config = await _Configuration2.default.initial(rawConfig);
-      const directline = await _DirectLine2.default.createDirectLine(config.directLineOptions);
+      const directline = await (0, _DirectLine.createDirectLine)(config.directLineOptions);
       return directline;
     };
 

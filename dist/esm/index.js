@@ -21,21 +21,23 @@ import MinimizableWebChat from './components/MinimizableWebChat'; //create compo
 
 import createBasicWebChat from './createBasicWebChat';
 import createMinimizableWebChat from './createMinimizableWebChat';
+const Components = {
+  BasicWebChatComponent,
+  WebChat,
+  MinimizableWebChat
+};
+const Utils = {
+  Storage,
+  Store,
+  WebChatToggleStateObservable: _objectSpread(_objectSpread({}, WebChatToggleStateObservable), {}, {
+    notify
+  }),
+  DirectLine,
+  Configuration
+};
 export default {
-  Components: {
-    BasicWebChatComponent,
-    WebChat,
-    MinimizableWebChat
-  },
-  Utils: {
-    Storage,
-    Store,
-    WebChatToggleStateObservable: _objectSpread(_objectSpread({}, WebChatToggleStateObservable), {}, {
-      notify
-    }),
-    DirectLine,
-    Configuration
-  }
+  Components,
+  Utils
 };
 window.GSSWebChat = {
   createBasicWebChat,

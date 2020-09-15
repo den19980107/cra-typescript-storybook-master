@@ -7,6 +7,8 @@ exports.endDirectLine = exports.getDirectLine = exports.createDirectLine = expor
 
 var _Configuration = _interopRequireDefault(require("./Configuration"));
 
+var _botframeworkWebchat = require("botframework-webchat");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -34,7 +36,7 @@ var createDirectLine = /*#__PURE__*/function () {
               break;
             }
 
-            directLine = window.WebChat.createDirectLine(directLineOptions);
+            directLine = (0, _botframeworkWebchat.createDirectLine)(directLineOptions);
             _context.next = 13;
             break;
 
@@ -60,7 +62,7 @@ var createDirectLine = /*#__PURE__*/function () {
           case 10:
             _yield$res$json = _context.sent;
             token = _yield$res$json.token;
-            directLine = window.WebChat.createDirectLine(_objectSpread(_objectSpread({}, directLineOptions), {}, {
+            directLine = (0, _botframeworkWebchat.createDirectLine)(_objectSpread(_objectSpread({}, directLineOptions), {}, {
               token: token
             }));
 
@@ -105,14 +107,15 @@ var getWatermark = function getWatermark() {
 
 
 var addCurrentUser = function addCurrentUser(_next2) {
-  var currentUserId = _Configuration.default.get().userId;
+  var config = _Configuration.default.get();
 
   directLine && directLine.postActivity({
     from: {
-      id: currentUserId
+      id: config.userId,
+      name: config.userName
     },
     membersAdded: [{
-      id: currentUserId
+      id: config.userId
     }],
     type: 'conversationUpdate'
   }).subscribe({
@@ -129,14 +132,15 @@ var addCurrentUser = function addCurrentUser(_next2) {
 };
 
 var removeCurrentUser = function removeCurrentUser(_next3) {
-  var currentUserId = _Configuration.default.get().userId;
+  var config = _Configuration.default.get();
 
   directLine && directLine.postActivity({
     from: {
-      id: currentUserId
+      id: config.userId,
+      name: config.userName
     },
     membersRemoved: [{
-      id: currentUserId
+      id: config.userId
     }],
     type: 'conversationUpdate'
   }).subscribe({
@@ -153,9 +157,12 @@ var removeCurrentUser = function removeCurrentUser(_next3) {
 };
 
 var addMembers = function addMembers(members, _next4) {
+  var config = _Configuration.default.get();
+
   directLine && directLine.postActivity({
     from: {
-      id: _Configuration.default.get().userId
+      id: config.userId,
+      name: config.userName
     },
     membersAdded: members,
     type: 'conversationUpdate'
@@ -173,9 +180,12 @@ var addMembers = function addMembers(members, _next4) {
 };
 
 var removeMembers = function removeMembers(members, _next5) {
+  var config = _Configuration.default.get();
+
   directLine && directLine.postActivity({
     from: {
-      id: _Configuration.default.get().userId
+      id: config.userId,
+      name: config.userName
     },
     membersRemoved: members,
     type: 'conversationUpdate'
@@ -197,8 +207,7 @@ var _default = {
   addMembers: addMembers,
   removeMembers: removeMembers,
   addCurrentUser: addCurrentUser,
-  removeCurrentUser: removeCurrentUser,
-  createDirectLine: createDirectLine
+  removeCurrentUser: removeCurrentUser
 };
 exports.default = _default;
 //# sourceMappingURL=DirectLine.js.map

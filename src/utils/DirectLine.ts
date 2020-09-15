@@ -1,10 +1,10 @@
 import Configuration from "./Configuration"
-
+import { createDirectLine as BotFrameworkWebChat_createDirectLine } from 'botframework-webchat'
 let directLine: BotFrameworkWebChat.IDirectLine = null
 
 const createDirectLine = async (directLineOptions: GSSWebChat.IDirectLineOptions): Promise<BotFrameworkWebChat.IDirectLine> => {
     if (directLineOptions.token) {
-        directLine = window.WebChat.createDirectLine(directLineOptions)
+        directLine = BotFrameworkWebChat_createDirectLine(directLineOptions)
     }
     else {
         //fetchToken
@@ -18,7 +18,7 @@ const createDirectLine = async (directLineOptions: GSSWebChat.IDirectLineOptions
         })
         const { token } = await res.json()
 
-        directLine = window.WebChat.createDirectLine({ ...directLineOptions, token })
+        directLine = BotFrameworkWebChat_createDirectLine({ ...directLineOptions, token })
     }
 
     console.log('conversationId: ' + directLine.conversationId)
@@ -26,7 +26,6 @@ const createDirectLine = async (directLineOptions: GSSWebChat.IDirectLineOptions
 
     return directLine
 }
-
 
 const getDirectLine = () => directLine
 
@@ -41,11 +40,11 @@ const getWatermark = () => directLine && directLine.watermark || 0
 //Activity types: https://docs.microsoft.com/zh-tw/azure/bot-service/dotnet/bot-builder-dotnet-activities?view=azure-bot-service-3.0
 
 const addCurrentUser = (next: Function) => {
-    const currentUserId = Configuration.get().userId
+    const config = Configuration.get()
 
     directLine && directLine.postActivity({
-        from: { id: currentUserId },
-        membersAdded: [{ id: currentUserId }],
+        from: { id: config.userId, name: config.userName },
+        membersAdded: [{ id: config.userId }],
         type: 'conversationUpdate'
     }).subscribe({
         next: (id: any) => next && next(id),
@@ -55,11 +54,11 @@ const addCurrentUser = (next: Function) => {
 }
 
 const removeCurrentUser = (next: Function) => {
-    const currentUserId = Configuration.get().userId
+    const config = Configuration.get()
 
     directLine && directLine.postActivity({
-        from: { id: currentUserId },
-        membersRemoved: [{ id: currentUserId }],
+        from: { id: config.userId, name: config.userName },
+        membersRemoved: [{ id: config.userId }],
         type: 'conversationUpdate'
     }).subscribe({
         next: (id: any) => next && next(id),
@@ -69,8 +68,10 @@ const removeCurrentUser = (next: Function) => {
 }
 
 const addMembers = (members: Array<GSSWebChat.IMember>, next: Function) => {
+    const config = Configuration.get()
+
     directLine && directLine.postActivity({
-        from: { id: Configuration.get().userId },
+        from: { id: config.userId, name: config.userName },
         membersAdded: members,
         type: 'conversationUpdate'
     }).subscribe({
@@ -81,8 +82,10 @@ const addMembers = (members: Array<GSSWebChat.IMember>, next: Function) => {
 }
 
 const removeMembers = (members: Array<GSSWebChat.IMember>, next: Function) => {
+    const config = Configuration.get()
+
     directLine && directLine.postActivity({
-        from: { id: Configuration.get().userId },
+        from: { id: config.userId, name: config.userName },
         membersRemoved: members,
         type: 'conversationUpdate'
     }).subscribe({
@@ -97,8 +100,7 @@ export default {
     addMembers,
     removeMembers,
     addCurrentUser,
-    removeCurrentUser,
-    createDirectLine
+    removeCurrentUser
 }
 
 export {

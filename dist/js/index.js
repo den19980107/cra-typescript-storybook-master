@@ -39,21 +39,23 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+var Components = {
+  BasicWebChatComponent: _BasicWebChatComponent.default,
+  WebChat: _WebChat.default,
+  MinimizableWebChat: _MinimizableWebChat.default
+};
+var Utils = {
+  Storage: _Storage.default,
+  Store: _Store.default,
+  WebChatToggleStateObservable: _objectSpread(_objectSpread({}, _WebChatToggleStateObservable.default), {}, {
+    notify: _WebChatToggleStateObservable.notify
+  }),
+  DirectLine: _DirectLine.default,
+  Configuration: _Configuration.default
+};
 var _default = {
-  Components: {
-    BasicWebChatComponent: _BasicWebChatComponent.default,
-    WebChat: _WebChat.default,
-    MinimizableWebChat: _MinimizableWebChat.default
-  },
-  Utils: {
-    Storage: _Storage.default,
-    Store: _Store.default,
-    WebChatToggleStateObservable: _objectSpread(_objectSpread({}, _WebChatToggleStateObservable.default), {}, {
-      notify: _WebChatToggleStateObservable.notify
-    }),
-    DirectLine: _DirectLine.default,
-    Configuration: _Configuration.default
-  }
+  Components: Components,
+  Utils: Utils
 };
 exports.default = _default;
 window.GSSWebChat = {

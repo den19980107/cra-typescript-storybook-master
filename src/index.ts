@@ -17,22 +17,26 @@ import MinimizableWebChat from './components/MinimizableWebChat';
 import createBasicWebChat from './createBasicWebChat';
 import createMinimizableWebChat from './createMinimizableWebChat';
 
-export default {
-  Components: {
-    BasicWebChatComponent,
-    WebChat,
-    MinimizableWebChat
+const Components = {
+  BasicWebChatComponent,
+  WebChat,
+  MinimizableWebChat
+}
+
+const Utils = {
+  Storage,
+  Store,
+  WebChatToggleStateObservable: {
+    ...WebChatToggleStateObservable,
+    notify
   },
-  Utils: {
-    Storage,
-    Store,
-    WebChatToggleStateObservable: {
-      ...WebChatToggleStateObservable,
-      notify
-    },
-    DirectLine,
-    Configuration
-  }
+  DirectLine,
+  Configuration
+}
+
+export default {
+  Components,
+  Utils
 };
 
 window.GSSWebChat = {
