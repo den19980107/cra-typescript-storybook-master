@@ -94,6 +94,8 @@
         const subscribeUnReadMessage = () => {
           _Store2.default.ActionObservable.subscribe(function subscribe(action) {
             if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
+              var _activity$from, _activity$from$id;
+
               const {
                 activity
               } = action.payload;
@@ -102,7 +104,7 @@
                 botId
               } = _Configuration2.default.get();
 
-              if (activity.type === 'message' && activity.from?.id?.toLowerCase() === botId && _WebChatToggleStateObservable2.default.getState() === 'close') {
+              if (activity.type === 'message' && ((_activity$from = activity.from) === null || _activity$from === void 0 ? void 0 : (_activity$from$id = _activity$from.id) === null || _activity$from$id === void 0 ? void 0 : _activity$from$id.toLowerCase()) === botId && _WebChatToggleStateObservable2.default.getState() === 'close') {
                 var _activity$text;
 
                 var msg = (_activity$text = activity.text) !== null && _activity$text !== void 0 ? _activity$text : '您有一則非純文字訊息，請點選查看';
