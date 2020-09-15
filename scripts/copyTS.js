@@ -5,7 +5,7 @@ const fse = require('fs-extra');
 /* eslint-enable @typescript-eslint/no-var-requires */
 
 const srcDir = path.join('./src');
-const distDir = path.join('./dist/js');
+const distDir = path.join('./dist/esm');
 
 const files = glob.sync('**/*.d.ts', {
   cwd: srcDir

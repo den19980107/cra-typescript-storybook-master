@@ -4,7 +4,7 @@ const fse = require('fs-extra');
 /* eslint-enable @typescript-eslint/no-var-requires */
 
 const srcDir = path.join(__dirname, '../src/styles');
-const distDir = path.join(__dirname, '../dist/js/styles');
+const distDir = path.join(__dirname, '../dist/esm/styles');
 
 let backupFolders = [
     {
