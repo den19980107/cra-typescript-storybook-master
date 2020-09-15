@@ -124,6 +124,10 @@ var _default = /*#__PURE__*/function (_React$Component) {
 
       var ReactWebChat = _botframeworkWebchat.default.ReactWebChat || _botframeworkWebchat.default;
 
+      if (typeof ReactWebChat !== "function") {
+        ReactWebChat = /*#__PURE__*/_react.default.createElement("div", null, "Fuck!");
+      }
+
       var webChatProps = _objectSpread(_objectSpread({}, this.props.config), {}, {
         userID: userId,
         username: userName,

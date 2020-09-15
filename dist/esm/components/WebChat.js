@@ -66,7 +66,11 @@ export default class _class extends React.Component {
       },
       state: {}
     } = this;
-    const ReactWebChat = WebChat.ReactWebChat || WebChat;
+    let ReactWebChat = WebChat.ReactWebChat || WebChat;
+
+    if (typeof ReactWebChat !== "function") {
+      ReactWebChat = /*#__PURE__*/React.createElement("div", null, "Fuck!");
+    }
 
     let webChatProps = _objectSpread(_objectSpread({}, this.props.config), {}, {
       userID: userId,

@@ -137,7 +137,11 @@
         },
         state: {}
       } = this;
-      const ReactWebChat = _botframeworkWebchat2.default.ReactWebChat || _botframeworkWebchat2.default;
+      let ReactWebChat = _botframeworkWebchat2.default.ReactWebChat || _botframeworkWebchat2.default;
+
+      if (typeof ReactWebChat !== "function") {
+        ReactWebChat = /*#__PURE__*/_react2.default.createElement("div", null, "Fuck!");
+      }
 
       let webChatProps = _objectSpread(_objectSpread({}, this.props.config), {}, {
         userID: userId,

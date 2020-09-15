@@ -64,7 +64,10 @@ export default class extends React.Component<WebChatProps, WebChatState> {
       state: { }
     } = this;
 
-    const ReactWebChat = WebChat.ReactWebChat || WebChat
+    let ReactWebChat = WebChat.ReactWebChat || WebChat
+    if (typeof ReactWebChat !== "function") {
+      ReactWebChat = <div>Fuck!</div>
+    }
 
 
     let webChatProps: any = {
