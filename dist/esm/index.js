@@ -35,10 +35,7 @@ const Utils = {
   DirectLine,
   Configuration
 };
-export default {
-  Components,
-  Utils
-};
+export { Components, Utils };
 window.GSSWebChat = {
   createBasicWebChat,
   createMinimizableWebChat,

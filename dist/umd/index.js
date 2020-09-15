@@ -16,6 +16,7 @@
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
+  exports.Utils = exports.Components = undefined;
 
   var _Storage2 = _interopRequireDefault(_Storage);
 
@@ -111,10 +112,8 @@
     DirectLine: _DirectLine2.default,
     Configuration: _Configuration2.default
   };
-  exports.default = {
-    Components,
-    Utils
-  };
+  exports.Components = Components;
+  exports.Utils = Utils;
   window.GSSWebChat = {
     createBasicWebChat: _createBasicWebChat2.default,
     createMinimizableWebChat: _createMinimizableWebChat2.default,

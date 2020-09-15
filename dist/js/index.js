@@ -5,7 +5,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.Utils = exports.Components = void 0;
 
 var _Storage = _interopRequireDefault(require("./utils/Storage"));
 
@@ -44,6 +44,7 @@ var Components = {
   WebChat: _WebChat.default,
   MinimizableWebChat: _MinimizableWebChat.default
 };
+exports.Components = Components;
 var Utils = {
   Storage: _Storage.default,
   Store: _Store.default,
@@ -53,11 +54,7 @@ var Utils = {
   DirectLine: _DirectLine.default,
   Configuration: _Configuration.default
 };
-var _default = {
-  Components: Components,
-  Utils: Utils
-};
-exports.default = _default;
+exports.Utils = Utils;
 window.GSSWebChat = {
   createBasicWebChat: _createBasicWebChat.default,
   createMinimizableWebChat: _createMinimizableWebChat.default,

@@ -60,8 +60,7 @@ export default class extends React.Component<WebChatProps, WebChatState> {
         config: { userId, userName,
           webChatOptions: { store, styleOptions }
         }
-      },
-      state: { }
+      }
     } = this;
 
     let ReactWebChat = WebChat.ReactWebChat || WebChat

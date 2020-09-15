@@ -70,7 +70,9 @@ export default class MinimizableWebChat extends React.Component {
             } = Configuration.get();
 
             if (activity.type === 'message' && activity.from?.id?.toLowerCase() === botId && WebChatToggleStateObservable.getState() === 'close') {
-              var msg = activity.text ?? '您有一則非純文字訊息，請點選查看';
+              var _activity$text;
+
+              var msg = (_activity$text = activity.text) !== null && _activity$text !== void 0 ? _activity$text : '您有一則非純文字訊息，請點選查看';
               that.setState(state => ({
                 messageUnreadCount: state.messageUnreadCount + 1,
                 previewMessage: msg

@@ -92,7 +92,7 @@ export default class MinimizableWebChat extends React.Component<MinimizableWebCh
                             && WebChatToggleStateObservable.getState() === 'close') {
 
                             var msg: string = activity.text ?? '您有一則非純文字訊息，請點選查看';
-                            
+
                             that.setState((state) => ({
                                 messageUnreadCount: state.messageUnreadCount + 1,
                                 previewMessage: msg
@@ -114,7 +114,7 @@ export default class MinimizableWebChat extends React.Component<MinimizableWebCh
                         lastHistoryId = activity.value.lastHistoryId
 
                         if (lastHistoryId) {
-                            if (activity.value.count){
+                            if (activity.value.count) {
                                 if (WebChatToggleStateObservable.getState() === 'open') {
                                     Store.notifyUserAlreadyRead()
                                 }
@@ -209,9 +209,9 @@ export default class MinimizableWebChat extends React.Component<MinimizableWebCh
 
         return (
             <div className="minimizable-web-chat">
-                <PreviewMessage 
-                    message = {this.state.previewMessage}
-                    maximizeButton = {this.handleMaximizeButtonClick}
+                <PreviewMessage
+                    message={this.state.previewMessage}
+                    maximizeButton={this.handleMaximizeButtonClick}
                 />
                 <button
                     className={`maximize ${(buttonOptions.visible && buttonOptions.displayOnTheSide) ? 'hide' : ''}`}

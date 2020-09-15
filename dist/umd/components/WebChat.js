@@ -134,8 +134,7 @@
               styleOptions
             }
           }
-        },
-        state: {}
+        }
       } = this;
       let ReactWebChat = _botframeworkWebchat2.default.ReactWebChat || _botframeworkWebchat2.default;
 

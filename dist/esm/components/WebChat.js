@@ -63,8 +63,7 @@ export default class _class extends React.Component {
             styleOptions
           }
         }
-      },
-      state: {}
+      }
     } = this;
     let ReactWebChat = WebChat.ReactWebChat || WebChat;
 

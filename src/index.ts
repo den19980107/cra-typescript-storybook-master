@@ -34,7 +34,7 @@ const Utils = {
   Configuration
 }
 
-export default {
+export {
   Components,
   Utils
 };
